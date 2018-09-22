@@ -14,7 +14,7 @@ Record::Record()
 	ifstream in;
 	string label;
 	int record;
-	
+
 	in.open("bin/record.dat");
 	if(in.fail())
 	{
@@ -40,26 +40,26 @@ Record::~Record()
 
 void Record::outputDetail()
 {
-	cout << "\n\t\tLEADERBOARDS\nRank\t\tPlayer\t\tAttempts\n";
+	cout << "\n\t\tWALL OF FAME\nRank\t\tPlayer\t\tAttempts\n";
 	for(int i = 0; i < SIZE; i++)
 		cout << i + 1 << "\t\t" << contents[i]->getName() 
 		     << "\t\t   " << contents[i]->getScore() << endl;
 	cout << endl;		
 }
 
-bool Record::addWinner(string name, int score)
+bool Record::addWinner(Player &winner)
 {
     for(int i = 0; i < SIZE; i++)
     {
-    	if(score < contents[i]->getScore())
+    	if(winner.getScore() < contents[i]->getScore())
     	{
     		for(int j = SIZE - 1; j > i; j--)
     		{
     			contents[j]->changeName(contents[j-1]->getName());
     			contents[j]->changeScore(contents[j-1]->getScore());
     		}
-    		contents[i]->changeName(name);
-    		contents[i]->changeScore(score);
+    		contents[i]->changeName(winner.getName());
+    		contents[i]->changeScore(winner.getScore());
 
     		updateRecord();
     		return true;

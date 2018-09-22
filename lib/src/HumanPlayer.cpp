@@ -14,17 +14,18 @@ HumanPlayer::HumanPlayer(string Name) :Player(Name)
 
 int HumanPlayer::getGuess()
 {
-	int temp;
+	int guess;
 	cout << "Enter your guess: ";
-	cin >> temp;
-	while(temp < 0 || temp > 100)
-	{
-		cout << "Invalid guess!" << endl;
-		cout << "Enter your guess: ";
-	    cin >> temp;
-	}
-	score++;
-	return temp;
+    cin >> guess;
+    while (cin.fail() || guess < 0 || guess > 100)
+    {
+        cin.clear();
+        cin.ignore();
+        cout << "Not a valid number. Please reenter: ";
+        cin >> guess;
+    }
+    score++;
+    return guess;
 }
 
 int HumanPlayer::getScore()

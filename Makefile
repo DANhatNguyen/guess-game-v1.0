@@ -1,7 +1,7 @@
 NAME = main # Your project's name
 
 # Select language 
-LANG = cpp
+LANG = c
 # LANG = cpp
 
 # General flags

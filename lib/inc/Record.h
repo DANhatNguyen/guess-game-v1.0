@@ -2,6 +2,7 @@
 #define RECORD_H
 
 #include "HumanPlayer.h"
+#include "Player.h"
 
 class Record
 {
@@ -9,7 +10,7 @@ public:
 	Record();
 	~Record();
 	void outputDetail();
-	bool addWinner(std::string name, int score);
+	bool addWinner(Player &winner);
 	void updateRecord();
 private:
 	HumanPlayer* contents[10];
