@@ -20,53 +20,55 @@ int main()
     Record chart;
 
     cout << "Welcome to the guessing game! Please choose a mode: " << endl;
-    cout << "    1. Vs Friend\n    2. Vs Valak" << endl;
+    cout << "\t1. Vs Friend\n\t2. Vs Valak\n\t3. Exit game\n" << endl;
     cin >> opt;
-    switch(opt)
+
+    while(cin.fail() || opt < 1 || opt > 3)
     {
-        case 1:
-        {
-            cout << "Enter player 1 name: ";
-            cin >> name;
-            HumanPlayer object_1(name);
-            cout << "Enter player 2 name: ";
-            cin >> name;
-            HumanPlayer object_2(name);
+        cin.clear();
+        cin.ignore();
+        cout << "Invalid option. Please choose again: ";
+        cin >> opt;   
+    }
+
+    if(opt == 1)
+    {
+        cout << "Enter player 1 name: ";
+        cin >> name;
+        HumanPlayer object_1(name);
+        cout << "Enter player 2 name: ";
+        cin >> name;
+        HumanPlayer object_2(name);
             
-            Player* winner = play(object_1, object_2);
+        Player* winner = play(object_1, object_2);
+        bool a = chart.addWinner(*winner);
+        if(a == 0)
+            cout << "\nSorry! You're good, but not good enough to be"
+                 <<  " on the Wall of Fame." << endl;
+        chart.outputDetail();
+    }
+        
+    else if(opt == 2)
+    {
+        cout << "Enter your name: ";
+        cin >> name;
+        HumanPlayer object_1(name);
+        ComputerPlayer object_2;
+                
+        Player* winner = play(object_1, object_2);
+        if(winner->getName() != "Valak")
+        {
             bool a = chart.addWinner(*winner);
             if(a == 0)
-                cout << "\nSorry! You're good, but not good enough to be"
-                     <<  " on the Wall of Fame." << endl;
-            chart.outputDetail();
-
-            break;
+            cout << "\nSorry! You're good, but not good enough to be"
+                 << " on the Wall of Fame." << endl;
         }
-        
-        case 2:
-        {
-            cout << "Enter your name: ";
-            cin >> name;
-            HumanPlayer object_1(name);
-            ComputerPlayer object_2;
                 
-            Player* winner = play(object_1, object_2);
-            if(winner->getName() != "Valak")
-            {
-                bool a = chart.addWinner(*winner);
-                if(a == 0)
-                cout << "\nSorry! You're good, but not good enough to be"
-                     << " on the Wall of Fame." << endl;
-            }
-                
-            chart.outputDetail();
-
-            break;
-        }
-
-        default:
-            break;       
+        chart.outputDetail();
     }
+
+    else if(opt == 3)
+        return EXIT_SUCCESS;
 
     return EXIT_SUCCESS;
 }   
