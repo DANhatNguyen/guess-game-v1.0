@@ -14,49 +14,69 @@ int checkForWin(int guess, int answer);
 
 int main()
 {
-	int opt;
-	string name;
+    int opt;
+    string name;
 
     Record chart;
 
-	cout << "Welcome to the guessing game! Please choose a mode: " << endl;
-	cout << "    1. Vs Friend\n    2. Vs Valak" << endl;
-	cin >> opt;
-	if(opt == 1)
+    cout << "Welcome to the guessing game! Please choose a mode: " << endl;
+    cout << "    1. Vs Friend\n    2. Vs Valak" << endl;
+    cin >> opt;
+    switch(opt)
     {
-		cout << "Enter player 1 name: ";
-		cin >> name;
-		HumanPlayer object_1(name);
-		cout << "Enter player 2 name: ";
-		cin >> name;
-		HumanPlayer object_2(name);
-		
-	    Player* winner = play(object_1, object_2);
-	    int a = chart.addWinner(winner->getName(), winner->getScore());
-        chart.outputDetail();
-	}
-	else
-	{
-		cout << "Enter your name: ";
-		cin >> name;
-		HumanPlayer object_1(name);
-		ComputerPlayer object_2;
-        	
-	    Player* winner = play(object_1, object_2);
-        if(winner->getName() != "Valak")
-            int a = chart.addWinner(winner->getName(), winner->getScore());
-        chart.outputDetail();       
-	}
+        case 1:
+        {
+            cout << "Enter player 1 name: ";
+            cin >> name;
+            HumanPlayer object_1(name);
+            cout << "Enter player 2 name: ";
+            cin >> name;
+            HumanPlayer object_2(name);
+            
+            Player* winner = play(object_1, object_2);
+            bool a = chart.addWinner(*winner);
+            if(a == 0)
+                cout << "\nSorry! You're good, but not good enough to be"
+                     <<  " on the Wall of Fame." << endl;
+            chart.outputDetail();
 
-	return EXIT_SUCCESS;
-}	
+            break;
+        }
+        
+        case 2:
+        {
+            cout << "Enter your name: ";
+            cin >> name;
+            HumanPlayer object_1(name);
+            ComputerPlayer object_2;
+                
+            Player* winner = play(object_1, object_2);
+            if(winner->getName() != "Valak")
+            {
+                bool a = chart.addWinner(*winner);
+                if(a == 0)
+                cout << "\nSorry! You're good, but not good enough to be"
+                     << " on the Wall of Fame." << endl;
+            }
+                
+            chart.outputDetail();
+
+            break;
+        }
+
+        default:
+            break;       
+    }
+
+    return EXIT_SUCCESS;
+}   
 
 int checkForWin(int guess, int answer) 
 {
     cout<< "You guessed " << guess << ".";
     if (answer == guess) 
     {
-    	cout<< "You’re right! You win!" << endl;
+        cout<< "You’re right! You win!" << endl;
         return 0; 
     }
     else if (answer < guess)
@@ -66,15 +86,15 @@ int checkForWin(int guess, int answer)
     }
     else
     {
-    	cout<< "Your guess is too low.\n" << endl;
+        cout<< "Your guess is too low.\n" << endl;
         return 2;
     }
 }
 
 Player* play(Player &player1, Player &player2) 
 {
-	time_t t;
-	srand((unsigned) time(&t));
+    time_t t;
+    srand((unsigned) time(&t));
     int answer = 0, guess = 0; 
     answer = rand() % 100; 
     int win = 1;
@@ -82,9 +102,9 @@ Player* play(Player &player1, Player &player2)
     {
         cout << player1.getName() << "’s turn to guess." << endl; 
         guess = player1.getGuess();
-		win = checkForWin(guess, answer);
-		player1.checkFeedback(win, guess);
-		player2.checkFeedback(win, guess);
+        win = checkForWin(guess, answer);
+        player1.checkFeedback(win, guess);
+        player2.checkFeedback(win, guess);
         
         if (win == 0) 
             return &player1;
@@ -93,7 +113,7 @@ Player* play(Player &player1, Player &player2)
         guess = player2.getGuess();
         win = checkForWin(guess, answer);
         player1.checkFeedback(win, guess);
-		player2.checkFeedback(win, guess);
+        player2.checkFeedback(win, guess);
     }   
     return &player2;
 }
