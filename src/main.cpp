@@ -149,13 +149,14 @@ Player* play(Player &player1, Player &player2)
         * human.checkFeedback does nothing.
         */
         player2.checkFeedback(win, guess);
+
         if (win == 0) 
             return &player1;
         
         cout << player2.getName() << "’s turn to guess." << endl; 
         guess = player2.getGuess();
         win = checkForWin(guess, answer);
-        // player1.checkFeedback(win, guess);
+
         player2.checkFeedback(win, guess);
     }   
 

@@ -35,8 +35,8 @@ DIRS = bin inc src doc build data
 
 all: bin/$(BIN)
 
-# Compile object files
-class: $(OBJECTS)
+# Compile object files from .cpp files except for main.cpp
+objects: $(OBJECTS)
 
 # Generate header dependencies
 -include $(DEPS)
@@ -45,7 +45,7 @@ class: $(OBJECTS)
 build/%.o: CXXFLAGS += -c # flag for compiling object libraries
 build/%.o: CXXFLAGS += -MP -MMD # flags for generating header dependencies
 build/%.o: src/%.cpp
-	@echo Building object files...	
+	@echo Building object files...
 	$(CXX) $(CXXFLAGS) $< -o $@
 	@echo Finished.
 
@@ -62,6 +62,19 @@ configure:
 	@mkdir -p $(DIRS)
 	@touch $(FILES)
 	@echo Finished.
+
+	@# [TODO] It seems like speeding Catch Unite Testing does not work properly, 
+	@# it requires C++11, even though I turn flag -std=c++11 on.
+
+	@# Uncomment these lines for configuring unit testing
+	@# Download Makefile for Unit Testing from Github
+	@#$(RM) test/Makefile
+	@#echo Download necessary files...
+	@#wget -P test/ $(MAKEFILE_TEST_LINK)
+	@# Make the Makefile in test for unit testing
+	@# make -C <dir> <option> is for changing the directory for multiple make
+	@#make -C test configure 
+	@#echo Finished
 
 .PHONY: clean
 clean:
