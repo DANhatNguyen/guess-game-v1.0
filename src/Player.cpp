@@ -1,24 +1,25 @@
-#include <string>
 #include "Player.h"
 
 using namespace std;
 
 Player::Player()
 {
-	name = "UNDEFINED";
+	_name = "UNDEFINED";
 }
 
-Player::Player(string Name)
+Player::Player(string name)
 {
-	name = Name;
+	_name = name;
 }
 
-string Player::getName()
+string 
+Player::getName()
 {
-	return name;
+	return _name;
 }
 
-void Player::changeName(string new_name)
+void 
+Player::changeName(string new_name)
 {
-	name = new_name;
+	_name = new_name;
 }

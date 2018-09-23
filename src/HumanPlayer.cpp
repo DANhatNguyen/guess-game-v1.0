@@ -1,39 +1,45 @@
-#include "Player.h"
 #include "HumanPlayer.h"
-#include <string>
-#include <iostream>
 
 using namespace std;
 
-HumanPlayer::HumanPlayer() :Player() {};
+HumanPlayer::HumanPlayer(): Player() {};
 
-HumanPlayer::HumanPlayer(string Name) :Player(Name) 
+/* Constructer */
+HumanPlayer::HumanPlayer(string name): Player(name) 
 {
-	score = 0;
+	_score = 0;
 }
 
-int HumanPlayer::getGuess()
+int 
+HumanPlayer::getGuess()
 {
 	int guess;
 	cout << "Enter your guess: ";
     cin >> guess;
+
+    /* Check input condition */
     while (cin.fail() || guess < 0 || guess > 100)
     {
         cin.clear();
         cin.ignore();
-        cout << "Not a valid number. Please reenter: ";
+        cout << "Invalid number. Please re-enter: ";
         cin >> guess;
     }
-    score++;
+    
+    /* Update score based on number of guessing */
+    _score++;
+    
     return guess;
 }
 
-int HumanPlayer::getScore()
+int 
+HumanPlayer::getScore()
 {
-	return score;
+	return _score;
 }
 
-void HumanPlayer::changeScore(int new_score)
+void 
+HumanPlayer::changeScore(int new_score)
 {
-	score = new_score;
+	_score = new_score;
 }

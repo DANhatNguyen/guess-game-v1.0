@@ -45,7 +45,7 @@ class: $(OBJECTS)
 build/%.o: CXXFLAGS += -c # flag for compiling object libraries
 build/%.o: CXXFLAGS += -MP -MMD # flags for generating header dependencies
 build/%.o: src/%.cpp
-	@echo Building object files...
+	@echo Building object files...	
 	$(CXX) $(CXXFLAGS) $< -o $@
 	@echo Finished.
 

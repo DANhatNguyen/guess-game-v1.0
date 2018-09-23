@@ -1,19 +1,37 @@
 #ifndef HUMAN_PLAYER_H
 #define HUMAN_PLAYER_H
 
-#include <string>
 #include "Player.h"
 
-class HumanPlayer : public Player
+#include <iostream>
+#include <string>
+
+/* 
+* HumanPlayer inherits from PLayer
+*/
+class HumanPlayer: public Player
 {
 public:
+	/* Default constructer */
 	HumanPlayer();
-	HumanPlayer(std::string Name);
-	virtual int getGuess();
-	virtual void checkFeedback(int fb, int guess) {}
-    virtual int getScore();
-    void changeScore(int new_score);
+
+	/* Constructer */
+	HumanPlayer(std::string name);
+
+	/* Setter */
+	void changeScore(int new_score);
+	
+	int getGuess();
+
+	/* 
+	* Narrow down the range computer has to guess in order to increase 
+	* the winning probability 
+	*/
+	void checkFeedback(int fb, int guess) {}
+    int getScore();
+
 private:
-	int score;
+	int _score;
 };
+
 #endif
