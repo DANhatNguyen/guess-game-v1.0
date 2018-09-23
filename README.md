@@ -17,11 +17,11 @@ make [OPTION]
 
 where `OPTION`:
 
-  *`DEBUG=true`: Enable debug mode and generate debugable file.
+  * `DEBUG=true`: Enable debug mode and generate debugable file.
 
-  *`DEBUG=false`: Disable debug mode.
+  * `DEBUG=false`: Disable debug mode.
 
-  *`BIN=<project_name>`: Specify executable file name.
+  * `BIN=<project_name>`: Specify executable file name.
 
 ## Usage
 
