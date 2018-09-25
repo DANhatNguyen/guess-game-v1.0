@@ -39,4 +39,4 @@ where `OPTION`:
 
 - [ ] Multiple rounds.
 
-- [x] Allow player enter long long name.
+- [x] Allow player enter long name with spaces.
