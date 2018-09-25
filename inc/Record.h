@@ -14,13 +14,18 @@ public:
 	Record();
 	~Record();
 
-	void outputDetail();
+	void setFilePath(const std::string file_path);
+	std::string getFilePath();
+
+	void printInfo();
 	bool addWinner(Player &winner);
 	void updateRecord();
 
 private:
+	std::string _file_path;
+	
+	const static int SIZE;
 	HumanPlayer* contents[10];
-	static int SIZE;
 };
 
 #endif

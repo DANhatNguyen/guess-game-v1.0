@@ -44,7 +44,7 @@ int main()
         
         cout << "Enter player 2 name: ";
         // cin.ignore();
-        std::getline(std::cin, name);
+        getline(cin, name);
         
         HumanPlayer object_2(name);
         
@@ -64,7 +64,8 @@ int main()
                  <<  " on the Wall of Fame." << endl;
         
         /* Print out Wall of Fame */
-        chart.outputDetail();
+        cout << "\n\t\tWALL OF FAME\nRank\t\tPlayer\t\tAttempts\n";
+        chart.printInfo();
     }
     
     /* Vs Computer */
@@ -87,8 +88,8 @@ int main()
                 cout << "\nSorry! You're good, but not good enough to be"
                      << " on the Wall of Fame." << endl;
         }
-        
-        chart.outputDetail();
+        cout << "\n\t\tWALL OF FAME\nRank\t\tPlayer\t\tAttempts\n";
+        chart.printInfo();
     }
 
     /* Exit */
@@ -139,7 +140,7 @@ Player* play(Player &player1, Player &player2)
     /* Game keeps proceeding until one wins */
     while (win != 0)
     {
-        cout << player1.getName() << "’s turn to guess." << endl; 
+        cout << player1.getName() << "’s turn to guess." << endl;
         guess = player1.getGuess();
 
         win = checkForWin(guess, answer);
@@ -149,6 +150,7 @@ Player* play(Player &player1, Player &player2)
         * human.checkFeedback does nothing.
         */
         player2.checkFeedback(win, guess);
+        
         if (win == 0) 
             return &player1;
         

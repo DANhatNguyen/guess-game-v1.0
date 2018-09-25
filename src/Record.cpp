@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int Record::SIZE = 10;
+const int Record::SIZE = 10;
 
 Record::Record()
 {
@@ -11,7 +11,7 @@ Record::Record()
 	int record;
 
 	/* Open record.dat */
-	in.open("../data/record.dat");
+	in.open("data/record.dat");
 
 	/* error checking */
 	if(in.fail())
@@ -24,7 +24,7 @@ Record::Record()
 	{
 		in >> label >> record;
 		contents[i] = new HumanPlayer(label);
-		contents[i]->changeScore(record);
+		contents[i]->setScore(record);
 	}
 
 	in.close();
@@ -36,19 +36,17 @@ Record::~Record()
 		delete contents[i];
 }
 
-/* Output Wall of Fame: score of top 10 players */
-void 
-Record::outputDetail()
+/* Output Wall of Fame: score of top @SIZE players */
+void Record::printInfo()
 {
-	cout << "\n\t\tWALL OF FAME\nRank\t\tPlayer\t\tAttempts\n";
+	// cout << "\n\t\tWALL OF FAME\nRank\t\tPlayer\t\tAttempts\n";
 	for(int i = 0; i < SIZE; i++)
 		cout << i + 1 << "\t\t" << contents[i]->getName() 
 		     << "\t\t   " << contents[i]->getScore() << endl;
 	cout << endl;		
 }
 
-bool 
-Record::addWinner(Player &winner)
+bool Record::addWinner(Player &winner)
 {
     for(int i = 0; i < SIZE; i++)
     {
@@ -57,13 +55,13 @@ Record::addWinner(Player &winner)
     		/* Shift players down */
     		for(int j = SIZE - 1; j > i; j--)
     		{
-    			contents[j]->changeName(contents[j-1]->getName());
-    			contents[j]->changeScore(contents[j-1]->getScore());
+    			contents[j]->setName(contents[j-1]->getName());
+    			contents[j]->setScore(contents[j-1]->getScore());
     		}
 
     		/* Add @winner to its corresponding position */
-    		contents[i]->changeName(winner.getName());
-    		contents[i]->changeScore(winner.getScore());
+    		contents[i]->setName(winner.getName());
+    		contents[i]->setScore(winner.getScore());
 
     		updateRecord();
     		return true;
@@ -72,12 +70,11 @@ Record::addWinner(Player &winner)
     return false;
 }
 
-void 
-Record::updateRecord()
+void Record::updateRecord()
 {
 	ofstream out;
 
-	out.open("../bin/record.dat");
+	out.open("data/record.dat");
 
 	/* error checking */
 	if(out.fail())
@@ -90,4 +87,14 @@ Record::updateRecord()
 		out << contents[i]->getName() << "\n" << contents[i]->getScore() << endl;
 
 	out.close();
+}
+
+void Record::setFilePath(const string file_path)
+{
+	_file_path = file_path;
+}
+
+string Record::getFilePath()
+{
+	return _file_path;
 }

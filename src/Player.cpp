@@ -7,19 +7,20 @@ Player::Player()
 	_name = "UNDEFINED";
 }
 
-Player::Player(string name)
+Player::Player(const string name)
 {
 	_name = name;
 }
 
-string 
-Player::getName()
+/* virtual destructer */
+Player::~Player() {}
+
+string Player::getName()
 {
 	return _name;
 }
 
-void 
-Player::changeName(string new_name)
+void Player::setName(const string name)
 {
-	_name = new_name;
+	_name = name;
 }

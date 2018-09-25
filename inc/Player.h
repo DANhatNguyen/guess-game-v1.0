@@ -11,13 +11,16 @@ public:
 	Player();
 
 	/* Constructer */
-	Player(std::string name);
+	Player(const std::string name);
+
+	/* virtual destructer */
+	virtual ~Player();
 	
 	/* Getter and setter */
 	std::string getName();
-	void changeName(std::string new_name);
+	void setName(const std::string name);
 
-	/* Virtual behaviours */
+	/* pure virtual behaviours */
 	virtual int getGuess() = 0;
 	virtual void checkFeedback(int fb, int guess) = 0;
 	virtual int getScore() = 0;

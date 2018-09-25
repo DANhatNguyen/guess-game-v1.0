@@ -2,42 +2,55 @@
 
 using namespace std;
 
-int ComputerPlayer::min_value = -1;
-int ComputerPlayer::max_value = 100;
+int ComputerPlayer::_min = -1;
+int ComputerPlayer::_max = 100;
 
-ComputerPlayer::ComputerPlayer(string name): Player(name) {}
+/* Default constructer with Player named "Valak" */
+ComputerPlayer::ComputerPlayer(): Player("Valak") {}
 
-int 
-ComputerPlayer::getGuess()
+ComputerPlayer::ComputerPlayer(const string name): Player(name) {}
+
+/* Invoke this if Player is ComputerPlayer */
+int ComputerPlayer::getGuess()
 {
 	int temp;
-	temp = rand() % 100;
 
-	while (temp <= min_value || temp >= max_value)
-		temp = rand() % 100;
-	
+	/* Generate a random number */
+	/* @temp: [0..100] */
+	// temp = rand() % 100;
+
+	// while (temp <= _min || temp >= _max)
+	// 	temp = rand() % 100;
+
+	/* Using bisection for increasing computer's winning probability */
+	temp = ceil((_min + _max)/2.0);
 	return temp;
 }
+
+
 /* Upper bound */
-void 
-ComputerPlayer::changeMax(int max)
+void ComputerPlayer::setMax(const int max)
 {
-	max_value = max;
+	_max = max;
 }
 
 /* lower bound */
-void 
-ComputerPlayer::changeMin(int min)
+void ComputerPlayer::setMin(const int min)
 {
-	min_value = min;
+	_min = min;
 }	
 
 /* Update upper bound and lower bound for computer player */
-void 
-ComputerPlayer::checkFeedback(int fb, int guess)
+void ComputerPlayer::checkFeedback(int fb, int guess)
 {
-	if ((fb == 1) && (guess < max_value))
-		changeMax(guess);
-	if ((fb == 2) && (guess > min_value))
-		changeMin(guess);
+	if ((fb == 1) && (guess < _max))
+		setMax(guess);
+	if ((fb == 2) && (guess > _min))
+		setMin(guess);
+}
+
+/* If ComputerPlayer wins, score does not count, so this func does nothing */
+int ComputerPlayer::getScore()
+{
+	return -1;
 }

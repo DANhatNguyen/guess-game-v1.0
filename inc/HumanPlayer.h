@@ -5,9 +5,9 @@
 
 #include <iostream>
 #include <string>
-
+#include <limits>
 /* 
-* HumanPlayer inherits from PLayer
+* HumanPlayer inherits from Player
 */
 class HumanPlayer: public Player
 {
@@ -16,22 +16,18 @@ public:
 	HumanPlayer();
 
 	/* Constructer */
-	HumanPlayer(std::string name);
-
-	/* Setter */
-	void changeScore(int new_score);
+	HumanPlayer(const std::string name);
 	
 	int getGuess();
-
-	/* 
-	* Narrow down the range computer has to guess in order to increase 
-	* the winning probability 
-	*/
-	void checkFeedback(int fb, int guess) {}
+	void checkFeedback(int fb, int guess);
     int getScore();
+
+    /* Setter */
+	void setScore(const int score);
 
 private:
 	int _score;
+	int _guess;
 };
 
 #endif

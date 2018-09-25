@@ -7,24 +7,34 @@
 #include <string>
 
 #include <cstdlib>
+#include <cmath>
 
 class ComputerPlayer: public Player
 {
 public:
-	/* Constructer */
-	ComputerPlayer(std::string name = "Valak");
+	/* Default constructer */
+	ComputerPlayer();
 
+	/* Constructer */
+	ComputerPlayer(const std::string name);
+	
 	/* Setter functions for min and max values */
-	void changeMin(int min);
-	void changeMax(int max);
+	/* Used for update upper bound and lower bound for ComputerPlayer */
+	void setMin(const int min);
+	void setMax(const int max);
 
 	int getGuess();
+
+	/* 
+	* increase the winning probability based on the updated range 
+	*/
 	void checkFeedback(int fb, int guess);
-	int getScore() {}
+
+	int getScore();
 
 private:
-	static int min_value;
-	static int max_value;
+	static int _min;
+	static int _max;
 };
 
 #endif
