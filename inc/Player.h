@@ -1,8 +1,11 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <string>
+#include "validation.h"
 
+#include <string>
+#include <iostream>
+// #include <cstdlib>
 /* Abstract class */
 class Player
 {

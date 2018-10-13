@@ -1,13 +1,11 @@
 #include "Player.h"
 
-using namespace std;
-
 Player::Player()
 {
 	_name = "UNDEFINED";
 }
 
-Player::Player(const string name)
+Player::Player(const std::string name)
 {
 	_name = name;
 }
@@ -15,12 +13,16 @@ Player::Player(const string name)
 /* virtual destructer */
 Player::~Player() {}
 
-string Player::getName()
+std::string Player::getName()
 {
 	return _name;
 }
 
-void Player::setName(const string name)
+void Player::setName(const std::string name)
 {
 	_name = name;
 }
+
+
+
+

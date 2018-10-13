@@ -8,24 +8,20 @@
 #include <iostream>
 #include <string>
 
+const int SIZE = 10;
+
 class Record
 {
 public:
 	Record();
 	~Record();
 
-	void setFilePath(const std::string file_path);
-	std::string getFilePath();
-
 	void printInfo();
 	bool addWinner(Player &winner);
 	void updateRecord();
 
 private:
-	std::string _file_path;
-	
-	const static int SIZE;
-	HumanPlayer* contents[10];
+	HumanPlayer* contents[SIZE];
 };
 
 #endif

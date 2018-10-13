@@ -5,6 +5,9 @@ include_dirs = -Iinc
 # General flags
 CXXFLAGS = -O2 -Wall $(include_dirs)
 
+# Extra flags that help
+# CXXFLAGS += -Wextra -Wpedantic
+
 # If DEBUG is specified, then add debug flags to CXXFLAGS
 DEBUG ?= false
 ifeq ($(DEBUG), true) 
@@ -62,19 +65,6 @@ configure:
 	@mkdir -p $(DIRS)
 	@touch $(FILES)
 	@echo Finished.
-
-	@# [TODO] It seems like speeding Catch Unite Testing does not work properly, 
-	@# it requires C++11, even though I turn flag -std=c++11 on.
-
-	@# Uncomment these lines for configuring unit testing
-	@# Download Makefile for Unit Testing from Github
-	@#$(RM) test/Makefile
-	@#echo Download necessary files...
-	@#wget -P test/ $(MAKEFILE_TEST_LINK)
-	@# Make the Makefile in test for unit testing
-	@# make -C <dir> <option> is for changing the directory for multiple make
-	@#make -C test configure 
-	@#echo Finished
 
 .PHONY: clean
 clean:

@@ -1,47 +1,25 @@
 #include "HumanPlayer.h"
 
-using namespace std;
-
-#include <ctype.h> //for is digit 
 HumanPlayer::HumanPlayer() {}
 
 /* Constructer */
-HumanPlayer::HumanPlayer(const string name): Player(name) 
+HumanPlayer::HumanPlayer(const std::string name): Player(name) 
 {
 	_score = 0;
-}
-
-bool isNumber(string input) {
-    for (size_t i = 0; i < input.size(); i++) {
-        if (input[i] != '0' && input[i] != '1' && input[i] != '2' && 
-            input[i] != '3' && input[i] != '4' && input[i] != '5' &&
-            input[i] != '6' && input[i] != '7' && input[i] != '8' &&
-            input[i] != '9')
-                return false;
-    }
-    return true;
 }
 
 /* Invoke this if Player is HumanPlayer */
 int HumanPlayer::getGuess()
 {
-    string guess;
-	cout << "Enter your guess: ";
-    cin >> guess;
+    std::string guess;
+	std::cout << "Enter your guess (a number from 0 to 100): ";
 
-    bool status = isNumber(guess);
-    if (status == true) {
-        _guess = stoi(guess);
-    }
-    /* Check input condition */
-    while (status != true || _guess < 0 || _guess > 100)
-    {
-        cout << "Invalid number. Please re-enter: ";
-        cin >> guess;
-        status = isNumber(guess);
-        if (status == true)
-            _guess = stoi(guess);
-    }
+   _guess = getValidNumber();
+
+   while(!isInRange(_guess, 0, 100)) {
+        std::cout << "Invalid guess. Please enter a guess from 0 to 100: ";
+        _guess = getValidNumber();
+   }
    
     /* Update score based on number of guessing */
     _score++;

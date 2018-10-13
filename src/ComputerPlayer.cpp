@@ -1,26 +1,17 @@
 #include "ComputerPlayer.h"
 
-using namespace std;
-
 int ComputerPlayer::_min = -1;
 int ComputerPlayer::_max = 100;
 
 /* Default constructer with Player named "Valak" */
 ComputerPlayer::ComputerPlayer(): Player("Valak") {}
 
-ComputerPlayer::ComputerPlayer(const string name): Player(name) {}
+ComputerPlayer::ComputerPlayer(const std::string name): Player(name) {}
 
 /* Invoke this if Player is ComputerPlayer */
 int ComputerPlayer::getGuess()
 {
 	int temp;
-
-	/* Generate a random number */
-	/* @temp: [0..100] */
-	// temp = rand() % 100;
-
-	// while (temp <= _min || temp >= _max)
-	// 	temp = rand() % 100;
 
 	/* Using bisection for increasing computer's winning probability */
 	temp = ceil((_min + _max)/2.0);
